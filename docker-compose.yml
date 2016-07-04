@@ -1,0 +1,33 @@
+version: '2'
+services:
+  viber:
+    build:
+      context: ./viber
+    image: demiash/viber
+    volumes:
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    environment:
+      - DISPLAY
+    devices:
+      - "/dev/snd"
+      - "/dev/dri"
+    working_dir: /opt/viber
+    command: ./Viber
+
+  skype:
+    build:
+      context: ./skype
+    image: demiash/skype
+    volumes:
+      - "/tmp/.X11-unix:/tmp/.X11-unix"
+      - "/etc/timezone:/etc/timezone:ro"
+      - "/etc/localtime:/etc/localtime:ro"
+    environment:
+      - DISPLAY
+      - QT_GRAPHICSSYSTEM="native"
+    devices:
+      - "/dev/snd"
+      - "/dev/dri"
+    command: ./usr/bin/skype
